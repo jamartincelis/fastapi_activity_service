@@ -32,4 +32,4 @@ docker-compose up
 
 Los enpoints se encuentran publicados en xxxxx. En el siguiente apartado, se puede ver la documentación de la api.
 
-[Project Service](API.md)
+[Activity Service](API.md)
