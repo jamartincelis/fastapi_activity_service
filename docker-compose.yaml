@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    activity-service-fastapi:
+        build: .
+        container_name: activity-service-fastapi
+        command: >
+            bash -c "uvicorn main:app --host 0.0.0.0 --reload"
+
+        volumes:
+            - ./src/:/code
+        ports:
+            - 8000:8000
