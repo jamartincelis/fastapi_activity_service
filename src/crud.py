@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from fastapi.encoders import jsonable_encoder
+from fastapi import HTTPException
 import models, schemas
 from typing import Any, Dict, Optional, Union
 
@@ -37,8 +38,10 @@ def list_activities(db: Session, user_id=None, project_id = None, skip: int = 0,
     return db.query(models.Activity).filter(models.Activity.user == user_id). \
         filter(models.Activity.project == project_id).offset(skip).limit(limit).all()
 
-def create_activity(db: Session, activity: schemas.ActivityCreate):
+def create_activity(db: Session, activity: schemas.ActivityCreate, user_id=None, project_id=None):
     obj_in_data = jsonable_encoder(activity)
+    obj_in_data['user'] = user_id
+    obj_in_data['project'] = project_id
     db_activity = models.Activity(**obj_in_data)
     db.add(db_activity)
     db.commit()
@@ -49,3 +52,16 @@ def get_activity(db: Session, user_id=None, project_id = None, activity_id = Non
     return db.query(models.Activity).filter(models.Activity.user == user_id). \
         filter(models.Activity.project == project_id). \
         filter(models.Activity.id == activity_id).first()
+
+def update_activity(db: Session, activity: schemas.ActivityUpdate, user_id=None, project_id = None, activity_id = None):
+    db_activity = get_activity(db, user_id, project_id, activity_id)
+    if not db_activity:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    activity_data = activity.dict(exclude_unset=True)
+    # Update model class variable from requested fields
+    for key, value in activity_data.items():
+        setattr(db_activity, key, value)
+    db.add(db_activity)
+    db.commit()
+    db.refresh(db_activity)
+    return db_activity

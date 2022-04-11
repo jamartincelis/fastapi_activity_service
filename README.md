@@ -8,7 +8,7 @@ Versión en desarrollo v.0.1
 
 ## Description
 
-Microservicio de metas del proyecto xerpa widgets.
+Microservicio de activiades.
 
 ## Requirements and Installation
 
@@ -30,6 +30,6 @@ docker-compose up
 
 ### Api Rest Docs
 
-Los enpoints se encuentran publicados en xxxxx. En el siguiente apartado, se puede ver la documentación de la api.
+Los enpoints se encuentran publicados en http://0.0.0.0:8000/docs. En el siguiente apartado, se puede ver la documentación de la api.
 
 [Project Service](API.md)

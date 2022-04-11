@@ -1,19 +1,13 @@
-# Saving Service
+# Activity Service
 
 Endpoints del microservicio de actividades.
 
-## Health check
+
+## Obtener las actividades
 
 ```bash
 curl --request GET \
-  --url http://127.0.0.1/activity-service/monitoring/health-check/
-```
-
-## Obtener las actividades por meta
-
-```bash
-curl --request GET \
-  --url http://127.0.0.1/activity-service/users/b9e605ee-4cca-400e-99c5-ae24abca97d5/projects/016fe969-4d2f-43f9-81b4-1bdcebd975e4/activities/
+  --url http://0.0.0.0:8000/users/b9e605ee-4cca-400e-99c5-ae24abca97d5/projects/016fe969-4d2f-43f9-81b4-1bdcebd975e4/activities/
 ```
 
 respuesta 
@@ -41,28 +35,32 @@ respuesta
 
 ```bash
 curl --request POST \
-  --url http://127.0.0.1/activity-service/users/b9e605ee-4cca-400e-99c5-ae24abca97d5/projects/016fe969-4d2f-43f9-81b4-1bdcebd975e4/activities/ \
+  --url http://0.0.0.0:8000/users/b9e605ee-4cca-400e-99c5-ae24abca97d5/projects/016fe969-4d2f-43f9-81b4-1bdcebd975e4/activities/ \
   --header 'content-type: application/json' \
-  --data '{"rule": "6e10b138-9899-43cf-8a62-d6119456aa82","payment": "edf6a8f3-3081-414e-9b2f-4b6fa32eba2e","project_name": "Meta de prueba","amount" : 1000,"title": "Title","message": "Message","footer": "Footer","rule_name": "Rule Name","rule_icon": "Icon"}'
+  --data '{"rule": "6e10b138-9899-43cf-8a62-d6119456aa82","payment": "edf6a8f3-3081-414e-9b2f-4b6fa32eba2e","project_name": "Meta de prueba","amount" : 1000,"title": "Title","message": "Message","footer": "Footer","rule_name": "Rule Name","rule_icon": "Icon", "activity_type": "E"}'
 ```
 
 respuesta 
 
 ```json
 {
-  "id": "9e7010bb-6060-40d1-85b0-17c86ba8d46d",
-  "user": "b9e605ee-4cca-400e-99c5-ae24abca97d5",
-  "project": "016fe969-4d2f-43f9-81b4-1bdcebd975e4",
-  "rule": "6e10b138-9899-43cf-8a62-d6119456aa82",
-  "payment": "edf6a8f3-3081-414e-9b2f-4b6fa32eba2e",
-  "project_name": "Meta de prueba",
-  "amount": "1000.00",
-  "title": "Title",
-  "message": "Message",
-  "footer": "Footer",
-  "rule_name": "Rule Name",
-  "rule_icon": "Icon",
-  "created_at": "2022-01-27T13:55:59.622686-06:00"
+   "user":"b9e605ee-4cca-400e-99c5-ae24abca97d5",
+   "project":"016fe969-4d2f-43f9-81b4-1bdcebd975e4",
+   "project_name":"Nombre meta",
+   "rule":null,
+   "rule_name":null,
+   "payment":null,
+   "amount":8000.0,
+   "title":"Probando creacion de actividades",
+   "message":"Probando creacion de actividades desde crear meta",
+   "footer":"footer",
+   "rule_icon":"icon",
+   "activity_type":{
+      "code":"E",
+      "value":"Event"
+   },
+   "id":"fc57e25a-5612-4ee6-b66c-d63aaa536814",
+   "created_at":"2022-04-03T04:12:05.793310"
 }
 ```
 
